@@ -1,0 +1,65 @@
+<template id="my-boilerplate">
+
+  <link rel="stylesheet" type="text/css" href="icons/fa/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="icons/ionicons/css/ionicons.min.css">
+
+  <style>
+   :host {
+      all: initial;
+      display: block;
+      font-family: var(--body-font, sans-serif);
+      font-size: 14px;
+    }
+  </style>
+
+  <div class="">
+
+  </div>
+
+</template>
+
+<script type="application/javascript">
+
+customElements.define('my-boilerplate', class extends HTMLElement {
+    constructor() {
+        super();
+
+        // Initializing state
+
+        const localdoc = document.currentScript.ownerDocument;
+        var tpl = localdoc.querySelector('#my-boilerplate');
+        this.attachShadow({mode: 'open'}).appendChild(tpl.content.cloneNode(true));
+
+        // Settings up event listeners
+    }
+
+    connectedCallback() {
+        // fetching resources or rendering
+    }
+
+    disconnectedCallback() {
+        // removing event listeners
+    }
+
+    static get observedAttributes() {
+        return ['disabled'];
+    }
+
+
+    attributeChangedCallback(attrName, oldVal, newVal) {
+        // Use this.shadowRoot.querySelector(<selector>) to access Shadow DOM
+    }
+
+    // reflecting DOM ojbect properties to HTML attributes
+    get disabled() {
+        return this.hasAttribute('disabled');
+    }
+
+    set disabled(val) {
+        if(val)
+            this.setAttribute('disabled', '');
+        else
+            this.removeAttribute('disabled');
+    }
+});
+</script>

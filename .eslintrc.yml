@@ -1,0 +1,43 @@
+extends: google
+plugins:
+    - json
+    - html
+rules:
+    max-len:
+        - 2
+        - code: 5000
+    indent:
+        - error
+        - 4
+    comma-dangle:
+        - error
+        - never
+    quotes: 0
+    no-invalid-this: 0
+    no-var: 0
+    require-jsdoc: 1
+    keyword-spacing:
+        - 2
+        - overrides:
+            if:
+                after: false
+            for:
+                after: false
+            catch:
+                after: false
+            switch:
+                after: false
+            while:
+                after: false
+    brace-style:
+        - 2
+        - stroustrup
+    guard-for-in: 0
+    quote-props:
+        - 2
+        - as-needed
+env:
+    browser: true
+    node: false
+    commonjs: false
+    amd: false

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Untitled Document</title>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <link rel="stylesheet" type="text/css" href="icons/fa/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="icons/ionicons/css/ionicons.min.css">
+    <link rel="stylesheet" type="text/css" href="theme.css">
+    <link rel="stylesheet" type="text/css" href="grid.css">
+
+    <link rel="import" href="../src/stat-box.html">
+    <link rel="import" href="../src/info-box.html">
+</head>
+  <body class="container-fluid">
+
+    <section class="row">
+      <info-box class="aqua col-lg-3 col-sm-6 col-xs-1" icon="fa fa-envelope-o" label="messages" number="1,410"></info-box>
+      <info-box class="green col-lg-3 col-sm-6 col-xs-1" icon="fa fa-flag-o" label="bookmarks" number="410"></info-box>
+      <info-box class="orange col-lg-3 col-sm-6 col-xs-1" icon="fa fa-files-o" label="uploads" number="13,648"></info-box>
+      <info-box class="red col-lg-3 col-sm-6 col-xs-1" icon="fa fa-star-o" label="likes" number="93,139" color="#DE06CB"></info-box>
+    </section>
+
+    <section class="row">
+      <info-box class="aqua col-lg-3 col-sm-6 col-xs-1" icon="fa fa-bookmark-o" label="bookmarks" number="1,341" progress="18">
+        18% Increase in 15 Days
+      </info-box>
+      <info-box class="green col-lg-3 col-sm-6 col-xs-1" icon="fa fa-thumbs-o-up" label="likes" number="38,510" progress="63">
+        63% Increase in 30 Days
+      </info-box>
+      <info-box class="orange col-lg-3 col-sm-6 col-xs-1" icon="fa fa-calendar" label="events" number="27,629" progress="45">
+        45% Increase in 30 Days
+      </info-box>
+      <info-box class="red col-lg-3 col-sm-6 col-xs-1" icon="fa fa-comments-o" label="comments" number="41,410" progress="85">
+        85% Increase in 30 Days
+      </info-box>
+    </section>
+
+    <section class="row">
+      <stat-box icon="fa fa-shopping-cart" number="45" unit="€" class="col-lg-3 col-xs-6 aqua">
+        New orders
+        <a href="https://google.fr" target="about:blank" slot="action" class="footer">More info!</a>
+      </stat-box>
+
+      <stat-box icon="ion ion-bag"  unit="%" class="col-lg-3 col-xs-6 green">Pas mal de trucs</stat-box>
+
+      <stat-box class="orange col-lg-3 col-xs-6" number="435">
+        Stuff
+        <button id="btclick" slot="action">Voir les details</button>
+      </stat-box>
+
+      <stat-box class="red col-lg-3 col-xs-6" color="#DE06CB"></stat-box>
+    </section>
+
+    <script>
+        document.querySelector('#btclick').addEventListener('click', function(e) {
+            console.log(e.target);
+        });
+    </script>
+
+  </body>
+</html>
