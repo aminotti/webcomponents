@@ -112,54 +112,56 @@
 </template>
 
 <script type="application/javascript">
+(function(document) {
+    const localdoc = document.currentScript.ownerDocument;
 
-customElements.define('stat-box', class extends HTMLElement {
+    customElements.define('stat-box', class extends HTMLElement {
 
-    constructor() {
-        super();
+        constructor() {
+            super();
 
-        const localdoc = document.currentScript.ownerDocument;
-        var tpl = localdoc.querySelector('#stat-box');
-        this.attachShadow({mode: 'open'}).appendChild(tpl.content.cloneNode(true));
+            var tpl = localdoc.querySelector('#stat-box');
+            this.attachShadow({mode: 'open'}).appendChild(tpl.content.cloneNode(true));
 
-        this.actionSlot = this.shadowRoot.querySelector('#action');
-        this.actionSlot.addEventListener('slotchange', (e) => {
+            this.actionSlot = this.shadowRoot.querySelector('#action');
+            this.actionSlot.addEventListener('slotchange', (e) => {
+                this.updateActionContent();
+            });
+        }
+
+        connectedCallback() {
             this.updateActionContent();
-        });
-    }
-
-    connectedCallback() {
-        this.updateActionContent();
-    }
-
-    updateActionContent() {
-        let dom = this.actionSlot.assignedNodes();
-
-        if(dom.length > 0)
-            this.actionSlot.assignedNodes()[0].innerHTML= this.actionSlot.assignedNodes()[0].innerHTML + '&nbsp;<i class="fa fa-arrow-circle-right"></i>';
-    }
-
-    static get observedAttributes() {
-        return ['icon', 'number', 'unit', 'color'];
-    }
-
-    attributeChangedCallback(attr, oldValue, newValue) {
-        if(attr === 'icon')
-            this.shadowRoot.querySelector('.icon').innerHTML = '<i class="' + newValue + '"></i>';
-        else if(attr === 'number') {
-            if(this.hasAttribute('unit'))
-                this.shadowRoot.querySelector('.inner>h3').innerHTML = newValue + '<sup>' + this.getAttribute('unit') + '</sup>';
-            else
-                this.shadowRoot.querySelector('.inner>h3').innerHTML = newValue;
         }
-        else if(attr === 'unit') {
-            if(this.hasAttribute('number'))
-                this.shadowRoot.querySelector('.inner>h3').innerHTML = this.getAttribute('number') + '<sup>' + newValue + '</sup>';
-            else
-                this.shadowRoot.querySelector('.inner>h3').innerHTML = '0<sup>' + newValue + '</sup>';
+
+        updateActionContent() {
+            let dom = this.actionSlot.assignedNodes();
+
+            if(dom.length > 0)
+                this.actionSlot.assignedNodes()[0].innerHTML= this.actionSlot.assignedNodes()[0].innerHTML + '&nbsp;<i class="fa fa-arrow-circle-right"></i>';
         }
-        else if(attr === 'color')
-            this.shadowRoot.querySelector('.small-box').style.backgroundColor = newValue;
-    }
-});
+
+        static get observedAttributes() {
+            return ['icon', 'number', 'unit', 'color'];
+        }
+
+        attributeChangedCallback(attr, oldValue, newValue) {
+            if(attr === 'icon')
+                this.shadowRoot.querySelector('.icon').innerHTML = '<i class="' + newValue + '"></i>';
+            else if(attr === 'number') {
+                if(this.hasAttribute('unit'))
+                    this.shadowRoot.querySelector('.inner>h3').innerHTML = newValue + '<sup>' + this.getAttribute('unit') + '</sup>';
+                else
+                    this.shadowRoot.querySelector('.inner>h3').innerHTML = newValue;
+            }
+            else if(attr === 'unit') {
+                if(this.hasAttribute('number'))
+                    this.shadowRoot.querySelector('.inner>h3').innerHTML = this.getAttribute('number') + '<sup>' + newValue + '</sup>';
+                else
+                    this.shadowRoot.querySelector('.inner>h3').innerHTML = '0<sup>' + newValue + '</sup>';
+            }
+            else if(attr === 'color')
+                this.shadowRoot.querySelector('.small-box').style.backgroundColor = newValue;
+        }
+    });
+})(document);
 </script>

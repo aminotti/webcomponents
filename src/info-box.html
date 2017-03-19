@@ -98,71 +98,73 @@
 </template>
 
 <script type="application/javascript">
+(function(document) {
+    const localdoc = document.currentScript.ownerDocument;
 
-customElements.define('info-box', class extends HTMLElement {
-    constructor() {
-        super();
+    customElements.define('info-box', class extends HTMLElement {
+        constructor() {
+            super();
 
-        const localdoc = document.currentScript.ownerDocument;
-        var tpl = localdoc.querySelector('#info-box');
-        this.attachShadow({mode: 'open'}).appendChild(tpl.content.cloneNode(true));
+            var tpl = localdoc.querySelector('#info-box');
+            this.attachShadow({mode: 'open'}).appendChild(tpl.content.cloneNode(true));
 
-        this.els = {
-            content: this.shadowRoot.querySelector('.content'),
-            icon: this.shadowRoot.querySelector('.icon'),
-            infoBox: this.shadowRoot.querySelector('.info-box'),
-            text: this.shadowRoot.querySelector('.text'),
-            number: this.shadowRoot.querySelector('.number')
-        };
+            this.els = {
+                content: this.shadowRoot.querySelector('.content'),
+                icon: this.shadowRoot.querySelector('.icon'),
+                infoBox: this.shadowRoot.querySelector('.info-box'),
+                text: this.shadowRoot.querySelector('.text'),
+                number: this.shadowRoot.querySelector('.number')
+            };
 
-        this.progressHTML = '<div class="progress-inner"><div class="progress-bar"></div></div><span class="progress-description"><slot></slot></span>';
-    }
-
-    static get observedAttributes() {
-        return ['icon', 'label', 'number', 'progress', 'color'];
-    }
-
-    attributeChangedCallback(attr, oldVal, newVal) {
-        if(attr === 'icon')
-            this.els.icon.innerHTML = '<i class="' + newVal + '"></i>';
-        else if(attr === 'label') {
-            this.els.text.innerHTML = newVal;
+            this.progressHTML = '<div class="progress-inner"><div class="progress-bar"></div></div><span class="progress-description"><slot></slot></span>';
         }
-        else if(attr === 'number') {
-            this.els.number.innerHTML = newVal;
+
+        static get observedAttributes() {
+            return ['icon', 'label', 'number', 'progress', 'color'];
         }
-        else if(attr === 'progress') {
-            if(!oldVal && newVal) {
-                this.els.content.insertAdjacentHTML('beforeend', this.progressHTML);
-                this.els.progressBar = this.shadowRoot.querySelector('.progress-bar');
-                this.els.infoBox.classList.add("bg");
-                this.els.icon.classList.remove("bg");
+
+        attributeChangedCallback(attr, oldVal, newVal) {
+            if(attr === 'icon')
+                this.els.icon.innerHTML = '<i class="' + newVal + '"></i>';
+            else if(attr === 'label') {
+                this.els.text.innerHTML = newVal;
+            }
+            else if(attr === 'number') {
+                this.els.number.innerHTML = newVal;
+            }
+            else if(attr === 'progress') {
+                if(!oldVal && newVal) {
+                    this.els.content.insertAdjacentHTML('beforeend', this.progressHTML);
+                    this.els.progressBar = this.shadowRoot.querySelector('.progress-bar');
+                    this.els.infoBox.classList.add("bg");
+                    this.els.icon.classList.remove("bg");
+                    this.setBGColor();
+                }
+                else {
+                    this.els.content.removeChild(this.shadowRoot.querySelector('.progress-inner'));
+                    this.els.content.removeChild(this.shadowRoot.querySelector('.progress-description'));
+                    this.els.infoBox.classList.remove("bg");
+                    this.els.icon.classList.add("bg");
+                    this.setBGColor();
+                }
+
+                if(newVal)
+                    this.els.progressBar.style.width = newVal + '%';
+            }
+            else if(attr === 'color')
                 this.setBGColor();
+        }
+
+        setBGColor() {
+            if(this.hasAttribute('progress')) {
+                this.els.infoBox.style.backgroundColor = this.getAttribute('color');
+                this.els.icon.style.backgroundColor = "rgba(0,0,0,0.2)";
             }
             else {
-                this.els.content.removeChild(this.shadowRoot.querySelector('.progress-inner'));
-                this.els.content.removeChild(this.shadowRoot.querySelector('.progress-description'));
-                this.els.infoBox.classList.remove("bg");
-                this.els.icon.classList.add("bg");
-                this.setBGColor();
+                this.els.icon.style.backgroundColor = this.getAttribute('color');
+                this.els.infoBox.style.backgroundColor = "#FFF";
             }
-
-            if(newVal)
-                this.els.progressBar.style.width = newVal + '%';
         }
-        else if(attr === 'color')
-            this.setBGColor();
-    }
-
-    setBGColor() {
-        if(this.hasAttribute('progress')) {
-            this.els.infoBox.style.backgroundColor = this.getAttribute('color');
-            this.els.icon.style.backgroundColor = "rgba(0,0,0,0.2)";
-        }
-        else {
-            this.els.icon.style.backgroundColor = this.getAttribute('color');
-            this.els.infoBox.style.backgroundColor = "#FFF";
-        }
-    }
-});
+    });
+})(document);
 </script>

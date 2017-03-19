@@ -41,3 +41,4 @@ env:
     node: false
     commonjs: false
     amd: false
+    es6: true

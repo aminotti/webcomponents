@@ -14,6 +14,10 @@
 
     <link rel="import" href="../src/stat-box.html">
     <link rel="import" href="../src/info-box.html">
+
+    <link rel="stylesheet" href="monokai-sublime.css">
+    <script src="highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
 </head>
   <body class="container-fluid">
 
@@ -23,6 +27,15 @@
       <info-box class="orange col-lg-3 col-sm-6 col-xs-1" icon="fa fa-files-o" label="uploads" number="13,648"></info-box>
       <info-box class="red col-lg-3 col-sm-6 col-xs-1" icon="fa fa-star-o" label="likes" number="93,139" color="#DE06CB"></info-box>
     </section>
+
+    <pre><code class="html">
+    &lt;section class="row"&gt;
+      &lt;info-box class="aqua col-lg-3 col-sm-6 col-xs-1" icon="fa fa-envelope-o" label="messages" number="1,410"&gt;&lt;/info-box&gt;
+      &lt;info-box class="green col-lg-3 col-sm-6 col-xs-1" icon="fa fa-flag-o" label="bookmarks" number="410"&gt;&lt;/info-box&gt;
+      &lt;info-box class="orange col-lg-3 col-sm-6 col-xs-1" icon="fa fa-files-o" label="uploads" number="13,648"&gt;&lt;/info-box&gt;
+      &lt;info-box class="red col-lg-3 col-sm-6 col-xs-1" icon="fa fa-star-o" label="likes" number="93,139" color="#DE06CB"&gt;&lt;/info-box&gt;
+    &lt;/section&gt;
+    </code></pre>
 
     <section class="row">
       <info-box class="aqua col-lg-3 col-sm-6 col-xs-1" icon="fa fa-bookmark-o" label="bookmarks" number="1,341" progress="18">
@@ -39,6 +52,23 @@
       </info-box>
     </section>
 
+    <pre><code class="html">
+    &lt;section class="row"&gt;
+      &lt;info-box class="aqua col-lg-3 col-sm-6 col-xs-1" icon="fa fa-bookmark-o" label="bookmarks" number="1,341" progress="18"&gt;
+        18% Increase in 15 Days
+      &lt;/info-box&gt;
+      &lt;info-box class="green col-lg-3 col-sm-6 col-xs-1" icon="fa fa-thumbs-o-up" label="likes" number="38,510" progress="63"&gt;
+        63% Increase in 30 Days
+      &lt;/info-box&gt;
+      &lt;info-box class="orange col-lg-3 col-sm-6 col-xs-1" icon="fa fa-calendar" label="events" number="27,629" progress="45"&gt;
+        45% Increase in 30 Days
+      &lt;/info-box&gt;
+      &lt;info-box class="red col-lg-3 col-sm-6 col-xs-1" icon="fa fa-comments-o" label="comments" number="41,410" progress="85"&gt;
+        85% Increase in 30 Days
+      &lt;/info-box&gt;
+    &lt;/section&gt;
+    </code></pre>
+
     <section class="row">
       <stat-box icon="fa fa-shopping-cart" number="45" unit="€" class="col-lg-3 col-xs-6 aqua">
         New orders
@@ -54,6 +84,24 @@
 
       <stat-box class="red col-lg-3 col-xs-6" color="#DE06CB"></stat-box>
     </section>
+
+    <pre><code class="html">
+    &lt;section class="row"&gt;
+      &lt;stat-box icon="fa fa-shopping-cart" number="45" unit="€" class="col-lg-3 col-xs-6 aqua"&gt;
+        New orders
+        &lt;a href="https://google.fr" target="about:blank" slot="action" class="footer"&gt;More info!&lt;/a&gt;
+      &lt;/stat-box&gt;
+
+      &lt;stat-box icon="ion ion-bag"  unit="%" class="col-lg-3 col-xs-6 green"&gt;Pas mal de trucs&lt;/stat-box&gt;
+
+      &lt;stat-box class="orange col-lg-3 col-xs-6" number="435"&gt;
+        Stuff
+        &lt;button id="btclick" slot="action"&gt;Voir les details&lt;/button&gt;
+      &lt;/stat-box&gt;
+
+      &lt;stat-box class="red col-lg-3 col-xs-6" color="#DE06CB"&gt;&lt;/stat-box&gt;
+    &lt;/section&gt;
+    </code></pre>
 
     <script>
         document.querySelector('#btclick').addEventListener('click', function(e) {
